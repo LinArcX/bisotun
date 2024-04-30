@@ -1,0 +1,3 @@
+[submodule "PDFGen"]
+	path = PDFGen
+	url = https://github.com/AndreRenaud/PDFGen
