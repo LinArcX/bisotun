@@ -2,22 +2,29 @@
 A simple & minimal wrapper library around [PDFGen](https://github.com/AndreRenaud/PDFGen) to generate resume/books/documents more easily.
 
 # why?
-Sometimes i need to generate PDF files. like to write my resume. there are some options avilable:
-1. using microsoft word to write your doc and export a pdf file.
-2. use typesetting systems like Tex/Latex, groff/troff/nroff, etc..
-3. use online websites.
+I need to generate PDF files, mostly to write my resume. There are some options avilable:
+1. Microsoft Word: write your doc and export a pdf file.
+2. Typesetting systems like Tex/Latex, groff/troff/nroff, etc..
+3. Online websites.
 
-I tested all of the above options, but none of them were my favorite. The values that i prefer:
-- having a tool/solution to generate a PDF in a simpleset/minimal manner.
-- having 100% control over my tools.
-  - maybe just number 2 can give this, because you think it's free & open-source? have a good time to fully understand it.
-  - i don't want to talk about online tools :) you don't even know what's happening behind the scene.
-- Tex/Latex is huge. there are some minimal installations media which stripped down the size of it. but it's still a lot for just generating a document.
-  - And it's not only about the size it occuped on your disk. it has a package manager with lots of dependencies. come on! i want to generate just a pdf.
-  - i don't care about different file format that we can generate in Tex/Latex. the only type of file which i care is PDF.
+I tested all of the them, but none of them was my favorite. The values that i appreciate:
+- having a tool to allows me generate a PDF file in a simpleset/minimal manner.
+- having 100% control over my tool.
+  - maybe typesettings systems like Tex/Latex have this property because you think it's free and open-source, right? Let's face it: have a good time to fully understand it!
+  - i don't want to talk about online website. You don't even know what's happening behind the scene :) 
+- Tex/Latex is huge. there are some stripped versions of it. but damn.. it's still a lot for just generating a PDF document.
+  - And it's not only about the size on your disk. It has a package manager with lots of dependencies. come on! i want to generate just a pdf.
+  - i don't care about different file format that we can generate in Tex/Latex. Just generating PDF files are important for me.
 
 # structure of the repo
-To use biston , you need to copy:
+To use __bisotun__, you can just add it as a git submodule to your current project like this:
+
+```
+git submodule add https://github.com/LinArcX/bisotun
+git submodule update --init --recursive
+```
+
+or if you want to do the old way, just copy:
 - `bisotun.c`
 - `bisotun.h`
 - `PDFGen/pdfgen.c`
