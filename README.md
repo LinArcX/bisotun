@@ -1,6 +1,8 @@
 # bisotun
 A simple & minimal wrapper library around [PDFGen](https://github.com/AndreRenaud/PDFGen) to generate resume/documents/books.
 
+[![bisotun_youtube](https://img.youtube.com/vi/Qm_yZY3gviE/0.jpg)](https://www.youtube.com/watch?v=Qm_yZY3gviE)
+
 # why?
 I need to generate PDF files, mostly to write my resume. There are some options avilable:
 1. WYSIWYG tools like Microsoft Word or open source alternatives.
