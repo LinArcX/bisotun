@@ -83,7 +83,7 @@ typedef struct dftProperties
 
 int openBisotun(BstnProperties *prop);
 void saveBisotun(BstnProperties *prop);
-int closeDafter(BstnProperties *prop);
+int closeBisotun(BstnProperties *prop);
 
 BstnPoint initPosition(BstnProperties *prop);
 BstnPoint currentPosition(BstnProperties *prop);

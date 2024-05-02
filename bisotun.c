@@ -62,7 +62,7 @@ saveBisotun(BstnProperties *prop)
 }
 
 int
-closeDafter(BstnProperties *prop)
+closeBisotun(BstnProperties *prop)
 {
   int err;
   const char *err_str = pdf_get_err(prop->pdf, &err);
@@ -284,5 +284,3 @@ genText(BstnProperties *prop,
     increaseY(prop, offsetAfterY);
   }
 }
-
-

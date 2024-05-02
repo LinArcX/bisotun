@@ -210,6 +210,6 @@ main(int argc, char *argv[])
     // save
     saveBisotun(&prop);
   }
-  closeDafter(&prop);
+  closeBisotun(&prop);
   return 0;
 }
