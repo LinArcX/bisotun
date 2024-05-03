@@ -5,9 +5,14 @@
 float pageSizeWidth;
 float pageSizeHeight;
 
+BstnProperties *prop;
+struct pdf_object *page;
+
 int
-openBisotun(BstnProperties *prop)
+openBisotun(BstnProperties *properties)
 {
+  prop = properties;
+
   struct pdf_info info;
   strncpy(info.creator, prop->author, ARRAY_SIZE * sizeof(char) - 1); info.creator[ARRAY_SIZE - 1] = 0;
   strncpy(info.producer, prop->author, ARRAY_SIZE * sizeof(char) - 1); info.producer[ARRAY_SIZE - 1] = 0;
@@ -56,13 +61,13 @@ openBisotun(BstnProperties *prop)
 }
 
 void
-saveBisotun(BstnProperties *prop)
+saveBisotun()
 {
   pdf_save(prop->pdf, prop->title);
 }
 
 int
-closeBisotun(BstnProperties *prop)
+closeBisotun()
 {
   int err;
   const char *err_str = pdf_get_err(prop->pdf, &err);
@@ -76,7 +81,7 @@ closeBisotun(BstnProperties *prop)
   return 1;
 }
 
-BstnPoint initPosition(BstnProperties *prop)
+BstnPoint initPosition()
 {
   BstnPoint point;
   point.x = prop->position.init.x;
@@ -84,7 +89,7 @@ BstnPoint initPosition(BstnProperties *prop)
   return point;
 }
 
-BstnPoint currentPosition(BstnProperties *prop)
+BstnPoint currentPosition()
 {
   BstnPoint point;
   point.x = prop->position.current.x;
@@ -93,35 +98,26 @@ BstnPoint currentPosition(BstnProperties *prop)
 }
 
 void
-increaseX(BstnProperties *prop, int number)
+increaseX(int number)
 {
   prop->position.current.x += number;
 }
 
 void
-increaseY(BstnProperties *prop, int number)
+increaseY(int number)
 {
   prop->position.current.x = prop->position.init.x;
   prop->position.current.y += number;
 }
 
 void
-increaseYKeepLatestX(BstnProperties *prop, int number)
+increaseYKeepLatestX(int number)
 {
   prop->position.current.y += number;
 }
 
 void
-genPage(BstnProperties *prop, struct pdf_object *page)
-{
-  prop->position.current.x = prop->position.init.x;
-  prop->position.current.y = prop->position.init.y;
-
-  page = pdf_append_page(prop->pdf);
-}
-
-void
-genPageNumber(BstnProperties *prop, struct pdf_object *page)
+genPageNumber()
 {
   char chCurrentPageNumber [41];
   sprintf(chCurrentPageNumber, "%d", prop->pageNumber.currentNumber++);
@@ -210,8 +206,21 @@ genPageNumber(BstnProperties *prop, struct pdf_object *page)
 }
 
 void
-genLine(BstnProperties *prop,
-        struct pdf_object *page,
+genPage()
+{
+  prop->position.current.x = prop->position.init.x;
+  prop->position.current.y = prop->position.init.y;
+
+  page = pdf_append_page(prop->pdf);
+
+  if(prop->pageNumber.autoGenerate == true)
+  {
+    genPageNumber();
+  }
+}
+
+void
+genLine(
         int offsetBeforeX, int offsetBeforeY,
         int offsetAfterX, int offsetAfterY,
         bool keepXPosition,
@@ -226,19 +235,18 @@ genLine(BstnProperties *prop,
                prop->position.current.y,
                height,
                PDF_RGB(0, 0, 0));
-  increaseX(prop, offsetAfterX);
+  increaseX(offsetAfterX);
   if(keepXPosition)
   {
-    increaseYKeepLatestX(prop, offsetAfterY);
+    increaseYKeepLatestX(offsetAfterY);
   }
   else
   {
-    increaseY(prop, offsetAfterY);
+    increaseY(offsetAfterY);
   }
 }
 
-void genIcon(BstnProperties *prop,
-              struct pdf_object *page,
+void genIcon(
               int offsetBeforeX, int offsetBeforeY,
               int offsetAfterX, int offsetAfterY,
               bool keepXPosition,
@@ -246,21 +254,19 @@ void genIcon(BstnProperties *prop,
 {
   pdf_add_image_file(prop->pdf, page, prop->position.current.x + offsetBeforeX, prop->position.current.y + offsetBeforeY, size, size, path);
 
-  increaseX(prop, offsetAfterX);
+  increaseX(offsetAfterX);
   if(keepXPosition)
   {
-    increaseYKeepLatestX(prop, offsetAfterY);
+    increaseYKeepLatestX(offsetAfterY);
   }
   else
   {
-    increaseY(prop, offsetAfterY);
+    increaseY(offsetAfterY);
   }
 }
 
 void
-genText(BstnProperties *prop,
-                  struct pdf_object *page,
-                  int offsetBeforeX, int offsetBeforeY,
+genText(int offsetBeforeX, int offsetBeforeY,
                   int offsetAfterX, int offsetAfterY,
                   bool keepXPosition,
                   int fontSize, bool isBold, bool isItalic, const char* text)
@@ -274,13 +280,13 @@ genText(BstnProperties *prop,
     pdf_set_font(prop->pdf, prop->font.regular.name);
   }
   pdf_add_text(prop->pdf, page, text, fontSize, prop->position.current.x + offsetBeforeX, prop->position.current.y + offsetBeforeY, PDF_RGB(0, 0, 0));
-  increaseX(prop, offsetAfterX);
+  increaseX(offsetAfterX);
   if(keepXPosition)
   {
-    increaseYKeepLatestX(prop, offsetAfterY);
+    increaseYKeepLatestX(offsetAfterY);
   }
   else
   {
-    increaseY(prop, offsetAfterY);
+    increaseY(offsetAfterY);
   }
 }

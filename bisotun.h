@@ -63,6 +63,7 @@ typedef struct dftPageNumber
 {
   int fontSize;
   int currentNumber;
+  bool autoGenerate;
   BstnPageNumberPosition position;
 } BstnPageNumber;
 
@@ -81,36 +82,32 @@ typedef struct dftProperties
   struct pdf_doc *pdf;
 } BstnProperties;
 
-int openBisotun(BstnProperties *prop);
-void saveBisotun(BstnProperties *prop);
-int closeBisotun(BstnProperties *prop);
+int openBisotun(BstnProperties *properties);
+void saveBisotun();
+int closeBisotun();
 
-BstnPoint initPosition(BstnProperties *prop);
-BstnPoint currentPosition(BstnProperties *prop);
+BstnPoint initPosition();
+BstnPoint currentPosition();
 
-void increaseX(BstnProperties *prop, int number);
-void increaseY(BstnProperties *prop, int number);
-void increaseYKeepLatestX(BstnProperties *prop, int number);
+void increaseX(int number);
+void increaseY(int number);
+void increaseYKeepLatestX(int number);
 
-void genPage(BstnProperties *prop, struct pdf_object *page);
-void genPageNumber(BstnProperties *prop, struct pdf_object *page);
+void genPage();
 
-void genLine(BstnProperties *prop,
-              struct pdf_object *page,
+void genLine(
               int offsetBeforeX, int offsetBeforeY,
               int offsetAfterX, int offsetAfterY,
               bool keepXPosition,
               int width, float height);
 
-void genIcon(BstnProperties *prop,
-              struct pdf_object *page,
+void genIcon(
               int offsetBeforeX, int offsetBeforeY,
               int offsetAfterX, int offsetAfterY,
               bool keepXPosition,
               int size, const char* path);
 
-void genText(BstnProperties *prop,
-              struct pdf_object *page,
+void genText(
               int offsetBeforeX, int offsetBeforeY,
               int offsetAfterX, int offsetAfterY,
               bool keepXPosition,
