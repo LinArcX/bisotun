@@ -39,7 +39,7 @@ into your project's directory. there's a example directory that you can find how
 In __example/__ directory, you can find __resume.c__ which is currently created as a template for resume files. for sure you can change it based on your taste :)
 To compile it, you just need a c compiler:
 
-  `gcc -lm -o ./output/resume ./examples/resume.c PDFGen/pdfgen.c bisotun.c`
+  `gcc -lm -g -o ./output/resume ./examples/resume.c PDFGen/pdfgen.c bisotun.c`
 
 And to run it:
 

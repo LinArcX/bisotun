@@ -12,6 +12,11 @@ int
 openBisotun(BstnProperties *properties)
 {
   prop = properties;
+  if(NULL == prop)
+  {
+    fprintf(stderr, "prop is NULL!\n");
+    return 0;
+  }
 
   struct pdf_info info;
   strncpy(info.creator, prop->author, ARRAY_SIZE * sizeof(char) - 1); info.creator[ARRAY_SIZE - 1] = 0;

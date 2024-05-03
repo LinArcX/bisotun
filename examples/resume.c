@@ -141,7 +141,8 @@ personalSkills()
   genText(20, -1, 10, 0, true, DASH_SIZE, false, false, "-"); 
   genText(20, 0, 30, 0, false, PARAGRAPH, false, false, "Careless"); 
   genText(140, -1, 10, 0, true, DASH_SIZE, false, false, "-"); 
-  genText(140, 0, 30, 0, false, PARAGRAPH, false, false, "Smilling"); genText(250, -1, 10, 0, true, DASH_SIZE, false, false, "-"); 
+  genText(140, 0, 30, 0, false, PARAGRAPH, false, false, "Smilling"); 
+  genText(250, -1, 10, 0, true, DASH_SIZE, false, false, "-"); 
   genText(250, 0, 30, 0, false, PARAGRAPH, false, false, "Happy"); 
   genText(360, -1, 10, 0, true, DASH_SIZE, false, false, "-"); 
   genText(360, 0, 30, LINE_SPACES, false, PARAGRAPH, false, false, "Easygoing"); 
@@ -215,15 +216,15 @@ main(int argc, char *argv[])
       researchInterests();
       honorsAndAwards();
       personalSkills();
-      hobbies();
+      trainingCoursesAndCertifications();
     }
     genPage();
     {
-      trainingCoursesAndCertifications();
+      hobbies();
     }
 
     saveBisotun();
+    closeBisotun();
   }
-  closeBisotun();
   return 0;
 }
